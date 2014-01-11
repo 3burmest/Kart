@@ -6,27 +6,24 @@ public class Randoms : MonoBehaviour {
 public GameObject plane;
 public GameObject piece;
 
-private int height;
-private int length;
+public static int height = 100;
+public static int length = 100;
+
+private int[,] save = new int[height, length];
+private int[,] field = new int[height, length];
 	
 	// Use this for initialization
 	void Start ()
 	{
 	   GameObject clone = Instantiate(plane, Vector3.zero, Quaternion.identity) as GameObject;
-	   clone.transform.Translate(new Vector3(500, 0, 500));
-//	   height = (int) plane.transform.lossyScale.x;
-//	   length = (int) plane.transform.lossyScale.z;
-       height = 100;
-       length = 100;
+	   clone.transform.Translate(new Vector3(height * 5, 0, length * 5));
+	   clone.transform.localScale = new Vector3(height, 0, length);
 	   
 	   Generate();
 	   Check1();
 	   Check2();
 	   Initialize();
 	}
-	
-private int[,] save = new int[100, 100];
-private int[,] field = new int[100, 100];
 	
 	void Generate()
     {
@@ -64,8 +61,8 @@ private int[,] field = new int[100, 100];
         {
             for(int b = 1; b < length - 1; ++b)
             {
-                int summe = field[i - 1, b] + field[i + 1, b] + field[i, b - 1] + field[i, b + 1];
-                if(summe > 3)
+                int summe = save[i - 1, b] + save[i + 1, b] + save[i, b - 1] + save[i, b + 1];
+                if(summe > 3 && (field[b,i] == 1))
                 {
                     save[i, b] = 1;
                 }
