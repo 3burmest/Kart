@@ -79,7 +79,11 @@ private int[,] field = new int[height, length];
                 var position = new Vector3(i*10, 0, b*10);
                 if(save[i, b] == 1)
                 {
-                    Instantiate(piece, position, Quaternion.identity);
+                    int size = (int) (Mathf.PerlinNoise(i + 0.1F, b + 0.1F) * 50);
+                    
+                    GameObject clone = Instantiate(piece, position, Quaternion.identity) as GameObject;
+                    clone.transform.localScale = new Vector3(10, size, 10);
+                    clone.transform.Translate(new Vector3(0, (float)size/2, 0));
                 }
             }
         }
