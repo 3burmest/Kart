@@ -17,7 +17,7 @@ private int[,] field = new int[height, length];
 	{
 	   GameObject clone = Instantiate(plane, Vector3.zero, Quaternion.identity) as GameObject;
 	   clone.transform.Translate(new Vector3(height * 5, 0, length * 5));
-	   clone.transform.localScale = new Vector3(height, 0, length);
+	   clone.transform.localScale = new Vector3(height, 1, length);
 	   
 	   Generate();
 	   Check1();
